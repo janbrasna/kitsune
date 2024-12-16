@@ -8,6 +8,8 @@ on:
     paths: # avoid extra builds
       - docs/**
       - mkdocs.yml
+      - kitsune/sumo/static/sumo/scss/**
+      - styleguide/**
       - .github/workflows/publish-docs.yml
 
 permissions:
@@ -28,10 +30,17 @@ jobs:
         with:
           python-version: 3.x
           cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build:styleguide
       - id: pages
         uses: actions/configure-pages@v5
       - run: pip install mkdocs-material 
       - run: mkdocs build -d dist
+      - run: mkdir dist/_kss && cp -r styleguide/build/. dist/_kss/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
