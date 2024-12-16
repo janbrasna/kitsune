@@ -2,11 +2,9 @@
 
 ## Summary
 
-```
 This chapter helps you get an installation of Kitsune up and running.
 
-If you have any problems getting Kitsune running, let us know. See :ref:`contact-us-chapter`.
-```
+If you have any problems getting Kitsune running, [let us know](contactus.md).
 
 ## Getting up and running
 
@@ -60,11 +58,11 @@ and follow the following steps.
     The running instance will be located at http://localhost:8000/ unless you specified otherwise,
     and the administrative control panel will be at http://localhost:8000/admin/.
 
-Another way you might choose to run the app (step 3 above) is by getting a shell in the container and then manually
+Another way you might choose to run the app (instead of step 4 above) is by getting a shell in the container and then manually
 running the Django dev server from there. This should make frequent restarts of the server a lot
 faster and easier if you need to do that:
 
-```
+```sh
 make runshell
 ./manage.py runserver 0.0.0.0:8000
 ```
@@ -91,20 +89,20 @@ After the above you can do some optional steps if you want to use the admin:
 
 -   Enable the admin control panel
 
-    ```
+    ```sh
     echo "ENABLE_ADMIN=True" >> .env
     ```
 
 -   Create a superuser
 
-    ```
-    docker-compose exec web ./manage.py createsuperuser
+    ```sh
+    docker compose exec web ./manage.py createsuperuser
     ```
 
 -   Create a profile for this user
 
-    ```
-    $ ./manage.py shell_plus
+    ```sh
+    ./manage.py shell_plus
     In [1]: u = User.objects.get(username="superuser")
     In [2]: Profile(user=u).save()
     ```
@@ -118,8 +116,8 @@ add `ENABLE_DEV_LOGIN=True` to your `.env` file.
 
 You can create a normal user like so:
 
-```
-docker-compose exec web ./manage.py shell_plus
+```sh
+docker compose exec web ./manage.py shell_plus
 In [1]: u = User(username="foobar")
 In [2]: u.save()
 In [3]: Profile(user=u).save()
@@ -129,11 +127,11 @@ You can then log in as that user by visiting: `http://localhost:8000/user/foobar
 
 ### Install Sample Data
 
-```eval_rst
 We include some sample data to get you started. You can install it by
-running this command::
+running this command:
 
-    docker-compose exec web ./manage.py generatedata
+```sh
+docker compose exec web ./manage.py generatedata
 ```
 
 ### Get AAQ working
@@ -173,7 +171,7 @@ or have entered data yourself through the admin interface.
 1. Enter into the web container
 
     ```shell
-    docker-compose exec web bash
+    docker compose exec web bash
     ```
 
 2. Build the indicies
@@ -207,7 +205,7 @@ pip install pre-commit
 Then set up its git pre-commit hook:
 
 ```bash
-$ pre-commit install
+pre-commit install
 ```
 
 After this,
@@ -216,14 +214,14 @@ pre-commit will check your changes for style problems.
 To run it manually you can use the command:
 
 ```bash
-$ pre-commit run
+pre-commit run
 ```
 
 which will run the checks for only your changes,
 or if you want to run the lint checks for all files:
 
 ```bash
-$ pre-commit run --all-files
+pre-commit run --all-files
 ```
 
 For more details see the [pre-commit docs](https://pre-commit.com).
@@ -237,7 +235,7 @@ For more details see the [pre-commit docs](https://pre-commit.com).
     within its package directory. To set this up, run this command to do
     the initial fetch:
     ```bash
-        docker-compose exec web ./manage.py update_product_details
+        docker compose exec web ./manage.py update_product_details
     ```
 
 ### Using Django Debug Toolbar
