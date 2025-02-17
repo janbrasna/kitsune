@@ -4,9 +4,6 @@ title: API
 
 SUMO has a series of API endpoints to access data.
 
-::: contents
-:::
-
 # Locales API
 
 > All locales supported by SUMO.
