@@ -13,9 +13,8 @@ the expected behavior\-\--and new code should come with tests.
 
 # Running the Test Suite
 
-If you followed the steps in `the installation docs
-<hacking_howto>`{.interpreted-text role="any"}, then you should be all
-set setup-wise.
+If you followed the steps in [the installation docs](hacking_howto.md),
+then you should be all set setup-wise.
 
 To run the tests, you need to do:
 
